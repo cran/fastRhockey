@@ -1,3 +1,17 @@
+# **fastRhockey 0.3.0**
+
+* Add print method for all functions with a time stamp and description of the data
+* Add `phf_team_logos` dataset to package for reference
+
+# **fastRhockey 0.2.1**
+
+* hotfix to `helper_phf_pbp_data()` penalty code
+* add `try()` to function examples
+
+# **fastRhockey 0.2.0**
+
+* `espn_nhl_teams()` function added.
+
 # **fastRhockey 0.1.0**
 
 * Prepped for CRAN

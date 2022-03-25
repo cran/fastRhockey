@@ -12,9 +12,9 @@
 #' @export
 #' @examples
 #' \donttest{
-#'   phf_team_box(game_id = 420339)
+#'   try(phf_team_box(game_id = 420339))
 #' }
-phf_team_box <- function(game_id = 268078) {
+phf_team_box <- function(game_id) {
 
   tryCatch(
     expr = {
@@ -30,7 +30,8 @@ phf_team_box <- function(game_id = 268078) {
       df <- df %>%
         dplyr::mutate(game_id = y) %>%
         dplyr::select(
-          .data$team, .data$game_id, .data$winner, .data$total_scoring, tidyr::everything())
+          .data$team, .data$game_id, .data$winner, .data$total_scoring, tidyr::everything()) %>%
+        make_fastRhockey_data("PHF Team Boxscore Information from PremierHockeyFederation.com",Sys.time())
 
     },
     error = function(e) {

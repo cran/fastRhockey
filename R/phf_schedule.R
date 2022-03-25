@@ -10,10 +10,10 @@
 #' @export
 #' @examples
 #' \donttest{
-#'   phf_schedule(season=2022)
+#'   try(phf_schedule(season=2022))
 #' }
 
-phf_schedule <- function(season = 2021){
+phf_schedule <- function(season){
   season_id <- dplyr::case_when(
     season == 2022 ~ 3372,
     season == 2021 ~ 2779,
@@ -59,7 +59,8 @@ phf_schedule <- function(season = 2021){
             .data$home_score > .data$away_score ~ .data$home_team,
             .data$home_score == .data$away_score & .data$date_group < Sys.Date() ~ "Tie",
             .data$home_score == .data$away_score & .data$date_group >= Sys.Date() ~ "",
-            TRUE ~ NA_character_))
+            TRUE ~ NA_character_)) %>%
+        make_fastRhockey_data("PHF Schedule Information from PremierHockeyFederation.com",Sys.time())
     },
     error = function(e) {
       message(glue::glue("{Sys.time()}: Invalid season or no schedule data available! Try a season from 2016-2021!"))

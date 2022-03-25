@@ -9,31 +9,32 @@
 #' @importFrom tidyr unnest unnest_wider everything
 #' @importFrom janitor clean_names
 #' @export
-#' @examples 
+#' @examples
 #' \donttest{
-#'   nhl_teams()
+#'   try(nhl_teams())
 #' }
 nhl_teams <- function(){
-  
+
   base_url <- "https://statsapi.web.nhl.com/api/v1/teams/"
-  
+
   full_url <- paste0(base_url)
-  
-  
+
+
   res <- httr::RETRY("GET", full_url)
-  
+
   # Check the result
   check_status(res)
-  
-  resp <- res %>%
-    httr::content(as = "text", encoding = "UTF-8")
+
   tryCatch(
     expr = {
+      resp <- res %>%
+        httr::content(as = "text", encoding = "UTF-8")
       teams_df <- jsonlite::fromJSON(resp)[["teams"]]
       teams_df <- jsonlite::fromJSON(jsonlite::toJSON(teams_df),flatten=TRUE)
-      teams_df <- teams_df %>% 
-        dplyr::rename(team_id = .data$id) %>% 
-        janitor::clean_names()
+      teams_df <- teams_df %>%
+        dplyr::rename(team_id = .data$id) %>%
+        janitor::clean_names() %>%
+        make_fastRhockey_data("NHL Teams Information from NHL.com",Sys.time())
     },
     error = function(e) {
       message(glue::glue("{Sys.time()}: Invalid arguments or no team info data available!"))

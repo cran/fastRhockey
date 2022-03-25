@@ -14,9 +14,9 @@
 #' @export
 #' @examples
 #' \donttest{
-#'   phf_game_all(game_id = 268127)
+#'   try(phf_game_all(game_id = 268127))
 #' }
-phf_game_all <- function(game_id = 368719) {
+phf_game_all <- function(game_id) {
   base_url <- "https://web.api.digitalshift.ca/partials/stats/game/play-by-play?game_id="
   full_url <- paste0(base_url, game_id)
 
@@ -70,13 +70,15 @@ phf_game_all <- function(game_id = 368719) {
       plays_df <- plays_df %>%
         dplyr::left_join(game_details, by = "game_id")
 
-      plays_df <- helper_phf_pbp_data(plays_df)
+      plays_df <- helper_phf_pbp_data(plays_df) %>%
+        make_fastRhockey_data("PHF Play-by-Play Information from PremierHockeyFederation.com",Sys.time())
 
       team_box_df <- data %>%
         helper_phf_team_box() %>%
         dplyr::mutate(game_id = game_id) %>%
         dplyr::select(
-          .data$team, .data$game_id, .data$winner, .data$total_scoring, tidyr::everything())
+          .data$team, .data$game_id, .data$winner, .data$total_scoring, tidyr::everything()) %>%
+        make_fastRhockey_data("PHF Team Box Information from PremierHockeyFederation.com",Sys.time())
 
       player_box_df <- phf_player_box(game_id = 420339)
       game_summary <- phf_game_summary(game_id = 268078)
@@ -132,9 +134,9 @@ phf_game_all <- function(game_id = 368719) {
 #' @export
 #' @examples
 #' \donttest{
-#'   phf_game_raw(game_id = 268078)
+#'   try(phf_game_raw(game_id = 268078))
 #' }
-phf_game_raw <- function(game_id = 268078) {
+phf_game_raw <- function(game_id) {
 
   base_url <- "https://web.api.digitalshift.ca/partials/stats/game/play-by-play?game_id="
   full_url <- paste0(base_url, game_id)
@@ -174,9 +176,9 @@ phf_game_raw <- function(game_id = 268078) {
 #' @export
 #' @examples
 #' \donttest{
-#'   phf_game_details(game_id = 268078)
+#'   try(phf_game_details(game_id = 268078))
 #' }
-phf_game_details <- function(game_id = 268078) {
+phf_game_details <- function(game_id) {
 
   base_url <- "https://web.api.digitalshift.ca/partials/stats/game?game_id="
   full_url <- paste0(base_url, game_id)
@@ -209,7 +211,7 @@ phf_game_details <- function(game_id = 268078) {
     away_location == "Boston" ~ "BOS",
     away_location == "Buffalo" ~ "BUF",
     away_location == "Connecticut" ~ "CTW",
-    away_location == "Metropolis" ~ "MET",
+    away_location == "Metropolitan" ~ "MET",
     away_location == "Minnesota" ~ "MIN",
     away_location == "Toronto" ~ "TOR",
     TRUE ~ NA_character_)
@@ -225,7 +227,7 @@ phf_game_details <- function(game_id = 268078) {
     home_location == "Boston" ~ "BOS",
     home_location == "Buffalo" ~ "BUF",
     home_location == "Connecticut" ~ "CTW",
-    home_location == "Metropolis" ~ "MET",
+    home_location == "Metropolitan" ~ "MET",
     home_location == "Minnesota" ~ "MIN",
     home_location == "Toronto" ~ "TOR",
     TRUE ~ NA_character_)
@@ -245,6 +247,8 @@ phf_game_details <- function(game_id = 268078) {
     "away_abbreviation" = away_abbreviation,
     "away_score_total" = as.integer(away_score)
   )
+  game_details <- game_details %>%
+    make_fastRhockey_data("PHF Game Details Information from PremierHockeyFederation.com",Sys.time())
   return(game_details)
 }
 
@@ -261,9 +265,9 @@ phf_game_details <- function(game_id = 268078) {
 #' @export
 #' @examples
 #' \donttest{
-#'   phf_game_summary(game_id = 268078)
+#'   try(phf_game_summary(game_id = 268078))
 #' }
-phf_game_summary <- function(game_id = 268127) {
+phf_game_summary <- function(game_id) {
 
   base_url <- "https://web.api.digitalshift.ca/partials/stats/game/boxscore?game_id="
   full_url <- paste0(base_url, game_id)
@@ -383,7 +387,18 @@ phf_game_summary <- function(game_id = 268127) {
     timeouts <- timeouts %>%
       janitor::clean_names()
   }
-
+  scoring_summary <- scoring_summary %>%
+    make_fastRhockey_data("PHF Game Scoring Summary Information from PremierHockeyFederation.com",Sys.time())
+  shootout_summary <- shootout_summary %>%
+    make_fastRhockey_data("PHF Game Shootout Summary Information from PremierHockeyFederation.com",Sys.time())
+  penalty_summary <- penalty_summary %>%
+    make_fastRhockey_data("PHF Game Penalty Summary Information from PremierHockeyFederation.com",Sys.time())
+  officials <- officials %>%
+    make_fastRhockey_data("PHF Game Officials Information from PremierHockeyFederation.com",Sys.time())
+  team_staff <- team_staff %>%
+    make_fastRhockey_data("PHF Game Team Staff Information from PremierHockeyFederation.com",Sys.time())
+  timeouts <- timeouts %>%
+    make_fastRhockey_data("PHF Game Timeouts Information from PremierHockeyFederation.com",Sys.time())
   game_summary <- c(list(scoring_summary),
                     list(shootout_summary),
                     list(penalty_summary),

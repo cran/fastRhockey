@@ -1,7 +1,7 @@
 Package: fastRhockey
 Title: Functions to Access Premier Hockey Federation and National
         Hockey League Play by Play Data
-Version: 0.1.0
+Version: 0.3.0
 Authors@R: c(
     person(given = "Ben", family = "Howell", email = "benhowell71@gmail.com", role = c("aut")),
     person(given = "Saiem", family = "Gilani", email = "saiem.gilani@gmail.com", role = c("cre", "aut")),
@@ -28,10 +28,10 @@ RoxygenNote: 7.1.2
 Config/testthat/edition: 3
 LazyData: true
 NeedsCompilation: no
-Packaged: 2021-12-09 14:16:41 UTC; saiem
+Packaged: 2022-03-24 16:57:40 UTC; saiem
 Author: Ben Howell [aut],
   Saiem Gilani [cre, aut],
   Alyssa Longmuir [ctb]
 Maintainer: Saiem Gilani <saiem.gilani@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-12-10 09:00:26 UTC
+Date/Publication: 2022-03-25 14:10:02 UTC

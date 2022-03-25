@@ -10,10 +10,10 @@
 #' @export
 #' @examples
 #' \donttest{
-#'  phf_team_roster(team = "Boston Pride", season = 2022)
+#'    try(phf_team_roster(team = "Boston Pride", season = 2022))
 #' }
 
-phf_team_roster <- function(team, season = 2022){
+phf_team_roster <- function(team, season = most_recent_phf_season()){
 
   league_info <- phf_league_info(season=season)
   season_id <- dplyr::case_when(
@@ -82,7 +82,8 @@ phf_team_roster <- function(team, season = 2022){
         dplyr::mutate(
           player_name = stringr::str_replace(.data$player_name,pattern = "#\\d+",replacement=""),
           player_id = as.integer(stringr::str_extract(.data$player_href, "\\d+"))) %>%
-        janitor::clean_names()
+        janitor::clean_names() %>%
+        make_fastRhockey_data("PHF Roster Information from PremierHockeyFederation.com",Sys.time())
 
       team_staff_df <- dplyr::bind_cols(team_row, team_staff)
       team_staff_df <- team_staff_df %>%
@@ -91,7 +92,8 @@ phf_team_roster <- function(team, season = 2022){
           team_name = .data$name,
           staff_name = .data$Name,
           staff_type = .data$Type) %>%
-        janitor::clean_names()
+        janitor::clean_names() %>%
+        make_fastRhockey_data("PHF Team Staff Information from PremierHockeyFederation.com",Sys.time())
 
 
       team_roster <- c(list(roster_df), list(team_staff_df))

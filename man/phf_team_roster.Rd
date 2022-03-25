@@ -4,7 +4,7 @@
 \alias{phf_team_roster}
 \title{phf_team_roster}
 \usage{
-phf_team_roster(team, season = 2022)
+phf_team_roster(team, season = most_recent_phf_season())
 }
 \arguments{
 \item{team}{Team name with nickname (e.g. Boston Pride, Buffalo Beauts)}
@@ -19,6 +19,6 @@ PHF Team Roster lookup
 }
 \examples{
 \donttest{
- phf_team_roster(team = "Boston Pride", season = 2022)
+   try(phf_team_roster(team = "Boston Pride", season = 2022))
 }
 }

@@ -15,7 +15,7 @@ NULL
 #' @export
 #' @examples
 #' \donttest{
-#' load_nhl_pbp(2021)
+#'   try(load_nhl_pbp(2021))
 #' }
 load_nhl_pbp <- function(seasons = most_recent_nhl_season(),...,
                          dbConnection = NULL, tablename = NULL) {
@@ -39,13 +39,12 @@ load_nhl_pbp <- function(seasons = most_recent_nhl_season(),...,
   if (is_installed("progressr")) p <- progressr::progressor(along = seasons)
 
   out <- lapply(urls, progressively(loader, p))
-  out <- data.table::rbindlist(out, use.names = TRUE, fill = TRUE)
+  out <- rbindlist_with_attrs(out)
   if (in_db) {
     DBI::dbWriteTable(dbConnection, tablename, out, append = TRUE)
     out <- NULL
   } else {
-    class(out) <- c("tbl_df","tbl","data.table","data.frame")
-
+    class(out) <- c("fastRhockey_data","tbl_df","tbl","data.table","data.frame")
   }
   out
 }
@@ -66,7 +65,7 @@ NULL
 #' @export
 #' @examples
 #' \donttest{
-#' load_nhl_team_box(2021)
+#'   try(load_nhl_team_box(2021))
 #' }
 load_nhl_team_box <- function(seasons = most_recent_nhl_season(), ...,
                               dbConnection = NULL, tablename = NULL) {
@@ -89,8 +88,8 @@ load_nhl_team_box <- function(seasons = most_recent_nhl_season(), ...,
   if (is_installed("progressr")) p <- progressr::progressor(along = seasons)
 
   out <- lapply(urls, progressively(loader, p))
-  out <- data.table::rbindlist(out, use.names = TRUE, fill = TRUE)
-  class(out) <- c("tbl_df","tbl","data.table","data.frame")
+  out <- rbindlist_with_attrs(out)
+  class(out) <- c("fastRhockey_data","tbl_df","tbl","data.table","data.frame")
   out
 }
 
@@ -114,7 +113,7 @@ NULL
 #' @export
 #' @examples
 #' \donttest{
-#' load_nhl_player_box(2021)
+#'   try(load_nhl_player_box(2021))
 #' }
 load_nhl_player_box <- function(seasons = most_recent_nhl_season(), ...,
                                 dbConnection = NULL, tablename = NULL) {
@@ -136,12 +135,12 @@ load_nhl_player_box <- function(seasons = most_recent_nhl_season(), ...,
   if (is_installed("progressr")) p <- progressr::progressor(along = seasons)
 
   out <- lapply(urls, progressively(loader, p))
-  out <- data.table::rbindlist(out, use.names = TRUE, fill = TRUE)
+  out <- rbindlist_with_attrs(out)
   if (in_db) {
     DBI::dbWriteTable(dbConnection, tablename, out, append = TRUE)
     out <- NULL
   } else {
-    class(out) <- c("tbl_df","tbl","data.table","data.frame")
+    class(out) <- c("fastRhockey_data","tbl_df","tbl","data.table","data.frame")
   }
   out
 }
@@ -163,7 +162,7 @@ NULL
 #' @export
 #' @examples
 #' \donttest{
-#' load_nhl_schedule(2021)
+#'   try(load_nhl_schedule(2021))
 #' }
 load_nhl_schedule <- function(seasons = most_recent_nhl_season(), ...,
                               dbConnection = NULL, tablename = NULL) {
@@ -186,12 +185,12 @@ load_nhl_schedule <- function(seasons = most_recent_nhl_season(), ...,
   if (is_installed("progressr")) p <- progressr::progressor(along = seasons)
 
   out <- lapply(urls, progressively(loader, p))
-  out <- data.table::rbindlist(out, use.names = TRUE, fill = TRUE)
+  out <- rbindlist_with_attrs(out)
   if (in_db) {
     DBI::dbWriteTable(dbConnection, tablename, out, append = TRUE)
     out <- NULL
   } else {
-    class(out) <- c("tbl_df","tbl","data.table","data.frame")
+    class(out) <- c("fastRhockey_data","tbl_df","tbl","data.table","data.frame")
   }
   out
 }

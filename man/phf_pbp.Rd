@@ -4,7 +4,7 @@
 \alias{phf_pbp}
 \title{phf_pbp}
 \usage{
-phf_pbp(game_id = 368719)
+phf_pbp(game_id)
 }
 \arguments{
 \item{game_id}{The unique ID code for the game that you are interested in viewing the data for}
@@ -17,6 +17,6 @@ phf_pbp: pull in the raw data for a game_id from the PHF/NWHL API
 }
 \examples{
 \donttest{
-  phf_pbp(game_id = 268127)
+  try(phf_pbp(game_id = 268127))
 }
 }

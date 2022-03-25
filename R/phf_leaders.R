@@ -11,8 +11,8 @@
 #' @export
 #' @examples
 #' \donttest{
-#'  phf_leaders(player_type = "skaters", season = 2022, season_type="Regular Season")
-#'  phf_leaders(player_type = "goalies", season = 2022, season_type="Regular Season")
+#'  try(phf_leaders(player_type = "skaters", season = 2022, season_type="Regular Season"))
+#'  try(phf_leaders(player_type = "goalies", season = 2022, season_type="Regular Season"))
 #' }
 
 phf_leaders <- function(player_type, season = 2021, season_type="Regular Season"){
@@ -151,7 +151,8 @@ phf_leaders <- function(player_type, season = 2021, season_type="Regular Season"
           )
 
       }
-
+      skaters <- skaters %>%
+        make_fastRhockey_data("PHF Leaderboard Information from PremierHockeyFederation.com",Sys.time())
     },
     error = function(e) {
       message(glue::glue("{Sys.time()}: Invalid parameters or no leaderboard data available!"))

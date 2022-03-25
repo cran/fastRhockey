@@ -4,7 +4,7 @@
 \alias{phf_game_summary}
 \title{phf_game_summary}
 \usage{
-phf_game_summary(game_id = 268127)
+phf_game_summary(game_id)
 }
 \arguments{
 \item{game_id}{The unique ID code for the game that you are interested in viewing the data for}
@@ -17,6 +17,6 @@ phf_game_summary: pull in the raw data for a game_id from the PHF/NWHL API
 }
 \examples{
 \donttest{
-  phf_game_summary(game_id = 268078)
+  try(phf_game_summary(game_id = 268078))
 }
 }

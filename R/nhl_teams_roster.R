@@ -13,7 +13,7 @@
 #' @export
 #' @examples
 #' \donttest{
-#'   nhl_teams_roster(team_id = 14, season = 20202021)
+#'   try(nhl_teams_roster(team_id = 14, season = 20202021))
 #' }
 nhl_teams_roster <- function(team_id, season=most_recent_nhl_season_api_param()){
 
@@ -31,10 +31,10 @@ nhl_teams_roster <- function(team_id, season=most_recent_nhl_season_api_param())
   # Check the result
   check_status(res)
 
-  resp <- res %>%
-    httr::content(as = "text", encoding = "UTF-8")
   tryCatch(
     expr = {
+      resp <- res %>%
+        httr::content(as = "text", encoding = "UTF-8")
       teams_df <- jsonlite::fromJSON(resp)[["roster"]]
       teams_df <- jsonlite::fromJSON(jsonlite::toJSON(teams_df),flatten=TRUE)
       teams_df <- teams_df %>%
@@ -45,7 +45,8 @@ nhl_teams_roster <- function(team_id, season=most_recent_nhl_season_api_param())
         janitor::clean_names() %>%
         dplyr::mutate(
           team_id = team_id,
-          season = season)
+          season = season) %>%
+        make_fastRhockey_data("NHL Teams Roster Information from NHL.com",Sys.time())
     },
     error = function(e) {
       message(glue::glue("{Sys.time()}: Invalid arguments or no team roster data for {team_id} available!"))

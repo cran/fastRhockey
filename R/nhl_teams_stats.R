@@ -13,7 +13,7 @@
 #' @export
 #' @examples
 #' \donttest{
-#'   nhl_teams_stats(team_id = 14)
+#'   try(nhl_teams_stats(team_id = 14))
 #' }
 nhl_teams_stats <- function(team_id, season=most_recent_nhl_season_api_param()){
 
@@ -31,10 +31,10 @@ nhl_teams_stats <- function(team_id, season=most_recent_nhl_season_api_param()){
   # Check the result
   check_status(res)
 
-  resp <- res %>%
-    httr::content(as = "text", encoding = "UTF-8")
   tryCatch(
     expr = {
+      resp <- res %>%
+        httr::content(as = "text", encoding = "UTF-8")
       teams_df <- jsonlite::fromJSON(resp)[["stats"]]
       types <- teams_df$type$gameType[1,]
       stats_df <- teams_df$splits[[1]]$stat
@@ -49,7 +49,8 @@ nhl_teams_stats <- function(team_id, season=most_recent_nhl_season_api_param()){
         janitor::clean_names() %>%
         dplyr::mutate(
           team_id = team_id,
-          season = season)
+          season = season) %>%
+        make_fastRhockey_data("NHL Teams Stats Information from NHL.com",Sys.time())
     },
     error = function(e) {
       message(glue::glue("{Sys.time()}: Invalid arguments or no team stats data for {team_id} available!"))

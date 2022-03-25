@@ -1,10 +1,14 @@
 
 # 
 
-# fastRhockey <a href='https://benhowell71.github.io/fastRhockey/'><img src='man/figures/logo.png' align="right" height="150" /></a>
+# fastRhockey <a href='https://benhowell71.github.io/fastRhockey/'><img src='https://raw.githubusercontent.com/benhowell71/fastRhockey/main/logo.png' align="right" width="20%" min-width="100px" /></a>
 
 <!-- badges: start -->
 
+[![CRAN
+version](https://img.shields.io/badge/dynamic/json?style=for-the-badge&color=success&label=CRAN%20version&prefix=v&query=%24.Version&url=https%3A%2F%2Fcrandb.r-pkg.org%2FfastRhockey)](https://CRAN.R-project.org/package=fastRhockey)
+[![CRAN
+downloads](https://img.shields.io/badge/dynamic/json?style=for-the-badge&color=success&label=Downloads&query=%24%5B0%5D.downloads&url=https%3A%2F%2Fcranlogs.r-pkg.org%2Fdownloads%2Ftotal%2F2021-10-26%3Alast-day%2FfastRhockey)](https://CRAN.R-project.org/package=fastRhockey)
 [![Version-Number](https://img.shields.io/github/r-package/v/benhowell71/fastRhockey?label=fastRhockey&logo=R&style=for-the-badge)](https://github.com/benhowell71/fastRhockey/)
 [![R-CMD-check](https://img.shields.io/github/workflow/status/benhowell71/fastRhockey/R-CMD-check?label=R-CMD-Check&logo=R&logoColor=white&style=for-the-badge)](https://github.com/benhowell71/fastRhockey/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg?style=for-the-badge&logo=github)](https://github.com/benhowell71/fastRhockey/)
@@ -47,6 +51,14 @@ this package intends to alleviate.
 
 ## Installation
 
+You can install the CRAN version of
+[**`fastRhockey`**](https://CRAN.R-project.org/package=fastRhockey)
+with:
+
+``` r
+install.packages("fastRhockey")
+```
+
 You can install the released version of
 [**`fastRhockey`**](https://github.com/BenHowell71/fastRhockey/) from
 [GitHub](https://github.com/BenHowell71/fastRhockey) with:
@@ -62,11 +74,9 @@ pacman::p_load_current_gh("BenHowell71/fastRhockey", dependencies = TRUE, update
 If you would prefer the `devtools` installation:
 
 ``` r
-# if you would prefer devtools installation
 if (!requireNamespace('devtools', quietly = TRUE)){
   install.packages('devtools')
 }
-# Alternatively, using the devtools package:
 devtools::install_github(repo = "BenHowell71/fastRhockey")
 ```
 

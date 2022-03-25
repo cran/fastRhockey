@@ -4,7 +4,7 @@
 \alias{phf_team_box}
 \title{phf_team_box}
 \usage{
-phf_team_box(game_id = 268078)
+phf_team_box(game_id)
 }
 \arguments{
 \item{game_id}{The unique ID code for the game that you are interested in viewing the data for}
@@ -17,6 +17,6 @@ phf_team_box: loads the team boxscore and shot/score data for a game into one da
 }
 \examples{
 \donttest{
-  phf_team_box(game_id = 420339)
+  try(phf_team_box(game_id = 420339))
 }
 }

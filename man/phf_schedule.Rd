@@ -4,7 +4,7 @@
 \alias{phf_schedule}
 \title{phf_schedule}
 \usage{
-phf_schedule(season = 2021)
+phf_schedule(season)
 }
 \arguments{
 \item{season}{Season (YYYY) to pull the schedule from, the concluding year in XXXX-YY format}
@@ -17,6 +17,6 @@ PHF Schedule lookup
 }
 \examples{
 \donttest{
-  phf_schedule(season=2022)
+  try(phf_schedule(season=2022))
 }
 }

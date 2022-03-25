@@ -12,9 +12,9 @@
 #' @export
 #' @examples
 #' \donttest{
-#'   phf_pbp(game_id = 268127)
+#'   try(phf_pbp(game_id = 268127))
 #' }
-phf_pbp <- function(game_id = 368719) {
+phf_pbp <- function(game_id) {
   base_url <- "https://web.api.digitalshift.ca/partials/stats/game/play-by-play?game_id="
   full_url <- paste0(base_url, game_id)
 
@@ -67,7 +67,8 @@ phf_pbp <- function(game_id = 368719) {
       plays_df <- plays_df %>%
         dplyr::left_join(game_details, by = "game_id")
 
-      plays_df <- helper_phf_pbp_data(plays_df)
+      plays_df <- helper_phf_pbp_data(plays_df) %>%
+        make_fastRhockey_data("PHF Play-by-Play Information from PremierHockeyFederation.com",Sys.time())
     },
     error = function(e) {
       message(glue::glue("{Sys.time()}: Invalid game_id or no game data available!"))

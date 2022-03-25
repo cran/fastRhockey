@@ -10,10 +10,10 @@
 #' @export
 #' @examples
 #' \donttest{
-#'  phf_team_stats(team = "Boston Pride", season = 2022)
+#'   try(phf_team_stats(team = "Boston Pride", season = 2022))
 #' }
 
-phf_team_stats <- function(team, season = 2022){
+phf_team_stats <- function(team, season = most_recent_phf_season()){
 
   league_info <- phf_league_info(season=season)
   season_id <- dplyr::case_when(
@@ -149,7 +149,8 @@ phf_team_stats <- function(team, season = 2022){
         dplyr::mutate(
           player_name = stringr::str_replace(.data$player_name,pattern = "#\\d+",replacement=""),
           player_id = as.integer(stringr::str_extract(.data$skaters_href, "\\d+"))
-        )
+        ) %>%
+        make_fastRhockey_data("PHF Team Skater Stats Information from PremierHockeyFederation.com",Sys.time())
 
       goalies <- dplyr::bind_cols(team_row, goalies)
       goalies <- goalies %>%
@@ -177,7 +178,8 @@ phf_team_stats <- function(team, season = 2022){
         dplyr::mutate(
           player_name = stringr::str_replace(.data$player_name,pattern = "#\\d+",replacement=""),
           player_id = as.integer(stringr::str_extract(.data$goalies_href, "\\d+"))
-        )
+        ) %>%
+        make_fastRhockey_data("PHF Team Goalie Stats Information from PremierHockeyFederation.com",Sys.time())
       team_stats <- c(list(skaters), list(goalies))
       names(team_stats) <- c("skaters", "goalies")
 

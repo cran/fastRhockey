@@ -22,3 +22,21 @@ NULL
 #'   \item{team_color_alt2}{alternate logo secondary color}
 #' }
 "nhl_team_logos"
+
+#' @rdname data
+#' @title **PHF Team logos & colors**
+#' @description
+#' A dataset containing the full team names, abbreviations, colors & logos
+#' for all PHF teams.
+#' @keywords data
+#' @format A data frame with 6 rows and 7 variables:
+#' \describe{
+#'   \item{full_team_name}{Full team name}
+#'   \item{team_abbr}{PremierHockeyFederation.com team abbreviation}
+#'   \item{team_nick}{Team Nickname}
+#'   \item{team_location}{PHF team location}
+#'   \item{team_color1}{Current primary team color. Full disclosure, I just color picked from the logos}
+#'   \item{team_color2}{Current secondary team color. Full disclosure, I just color picked from the logos}
+#'   \item{team_logo}{Primary team logo from fastRhockey data repository}
+#' }
+"phf_team_logos"
