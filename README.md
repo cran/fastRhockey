@@ -1,7 +1,7 @@
 
 # 
 
-# fastRhockey <a href='http://fastrhockey.sportsdataverse.org/'><img src='https://raw.githubusercontent.com/sportsdataverse/fastRhockey/main/logo.png' align="right" width="20%" min-width="100px" /></a>
+# fastRhockey <a href='http://fastrhockey.sportsdataverse.org/'><img src='https://raw.githubusercontent.com/sportsdataverse/fastRhockey/main/logo.png' align="right" width="20%" min-width="100" /></a>
 
 <!-- badges: start -->
 
@@ -23,8 +23,8 @@ have been a few scrapers for the PHF (formerly the NWHL), but they’ve
 all been deprecated since the league changed website formats.
 
 With the seventh season of the league kicking off on November 6th, and
-games being broadcasted on ESPN+, this package was created to allow
-access to play-by-play data to continue pushing women’s hockey analytics
+games being broadcast on ESPN+, this package was created to allow access
+to play-by-play data to continue pushing women’s hockey analytics
 forward.
 
 In Spring of 2021, the [Big Data
@@ -43,7 +43,7 @@ this package intends to alleviate.
 
 <center>
 
-<img src='man/figures/fastRhockey_full_holographic_graphic.png' align="center" width="70%" />
+<img src='man/figures/fastRhockey_full_holographic_graphic.png' width="70%" />
 
 </center>
 

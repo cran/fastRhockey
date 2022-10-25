@@ -1,14 +1,14 @@
 Package: fastRhockey
 Title: Functions to Access Premier Hockey Federation and National
         Hockey League Play by Play Data
-Version: 0.3.1
+Version: 0.4.0
 Authors@R: c(
     person(given = "Ben", family = "Howell", email = "benhowell71@gmail.com", role = c("aut")),
     person(given = "Saiem", family = "Gilani", email = "saiem.gilani@gmail.com", role = c("cre", "aut")),
     person(given = "Alyssa", family = "Longmuir", email = "aklongmuir@gmail.com", role = c("ctb"))
   )
 Description: A utility to scrape and load play-by-play data
-    and statistics from the Premier Hockey Federation (PHF)<https://www.premierhockeyfederation.com/>, formerly
+    and statistics from the Premier Hockey Federation (PHF) <https://www.premierhockeyfederation.com/>, formerly
     known as the National Women's Hockey League (NWHL). Additionally, allows access to the National Hockey League's
     stats API <https://www.nhl.com/>.
 License: MIT + file LICENSE
@@ -28,10 +28,10 @@ RoxygenNote: 7.2.1
 Config/testthat/edition: 3
 LazyData: true
 NeedsCompilation: no
-Packaged: 2022-08-28 22:41:20 UTC; saiem
+Packaged: 2022-10-25 20:38:20 UTC; saiem
 Author: Ben Howell [aut],
   Saiem Gilani [cre, aut],
   Alyssa Longmuir [ctb]
 Maintainer: Saiem Gilani <saiem.gilani@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-08-28 22:50:02 UTC
+Date/Publication: 2022-10-25 20:55:15 UTC
